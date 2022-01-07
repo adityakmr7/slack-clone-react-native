@@ -6,32 +6,56 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 
+import { Feather as Icon } from "@expo/vector-icons";
+import {
+  ChannelListBox,
+  Divider,
+  FloatingButton,
+  HeadingText,
+  ProfileView,
+  SearchBox,
+} from "../components";
+
 const HomeScreen = () => {
+  const handleAddChannel = () => {
+    return true;
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.wrapper}>
-          <View>
-            <TextInput style={styles.input} placeholder="Jump to..." />
-          </View>
-          <View style={styles.box}>
-            <Text style={styles.title}>Unreads</Text>
-
-          </View>
-          <View style={styles.channelBoxWrapper} >
-              <View style={styles.channelBox}>
-                  
-              <Text style={styles.channelText}>#</Text>
-              <Text style={[styles.channelText,styles.marginText]}>announcement</Text>
+          <SearchBox />
+          <HeadingText heading="Unreads" />
+          <ChannelListBox channelName="announcement" />
+          <View style={styles.channelWrapper}>
+            <TouchableOpacity onPress={handleAddChannel}>
+              <View style={styles.addChannelBtn}>
+                <Icon size={20} name="plus" />
+                <Text
+                  style={{
+                    marginHorizontal: 10,
+                    fontSize: 20,
+                    color: "grey",
+                  }}
+                >
+                  Add Channel
+                </Text>
               </View>
-              <View style={styles.bullet}>
-                    <Text style={{color:'#ffffff'}}>2</Text>
-              </View>
+            </TouchableOpacity>
           </View>
         </View>
+        <Divider />
+        <View style={{ marginHorizontal: 10, marginVertical: 20 }}>
+          <HeadingText heading="Direct Message" />
+          <ProfileView name="aditya kumar (you)" />
+        </View>
+        <Divider />
       </ScrollView>
+      <FloatingButton />
     </SafeAreaView>
   );
 };
@@ -43,39 +67,22 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 10,
   },
-  input: {
-    borderColor: "#000000",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderStyle: "solid",
 
-    padding: 10,
-    borderRadius: 5,
-    fontWeight: "500",
-  },
   box: {
-      marginVertical:10
+    marginVertical: 10,
   },
   title: {
-      fontSize:16,
-      fontWeight: "600",
-      color:"#1c1c1c"
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1c1c1c",
   },
-  channelBoxWrapper: {
-    flexDirection:'row', justifyContent:'space-between', alignItems:'center'
+  addChannelBtn: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
-  channelBox: {
-      display:'flex',
-      flexDirection:'row',
-      alignItems:'center'
+  channelWrapper: {
+    marginTop: 10,
   },
-  channelText: {
-    fontWeight:'bold',fontSize:18
-  },
-  marginText: {
-    marginHorizontal:20
-  }
-,bullet: {
-    backgroundColor:"#CE365C", paddingHorizontal:10,paddingVertical:5,borderRadius:20
-}
 });
 export default HomeScreen;
